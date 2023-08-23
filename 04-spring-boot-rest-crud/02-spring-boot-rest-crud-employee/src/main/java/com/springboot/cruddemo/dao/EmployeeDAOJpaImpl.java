@@ -11,7 +11,6 @@ import java.util.List;
 public class EmployeeDAOJpaImpl implements EmployeeDAO {
 
     private EntityManager entityManager;
-    public String name;
     @Autowired
     public EmployeeDAOJpaImpl(EntityManager theEntityManager){
         entityManager=theEntityManager;
@@ -21,5 +20,20 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
         TypedQuery<Employee> theQuery= entityManager.createQuery("from Employee",Employee.class);
         List<Employee> employees= theQuery.getResultList();
         return employees;
+    }
+    @Override
+    public Employee findById(int id ){
+        Employee employee= entityManager.find(Employee.class,id);
+        return employee;
+    }
+
+    @Override
+    public Employee save(Employee theEmployee) {
+        Employee employee= entityManager.merge(theEmployee);
+        return employee;
+    }
+    @Override
+    public void delete(Employee theEmployee) {
+        entityManager.remove(theEmployee);
     }
 }
