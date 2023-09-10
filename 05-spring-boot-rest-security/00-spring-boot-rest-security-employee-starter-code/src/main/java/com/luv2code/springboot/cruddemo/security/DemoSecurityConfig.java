@@ -18,20 +18,20 @@ public class DemoSecurityConfig {
 
         UserDetails giannis = User.builder()
                 .username("Giannis")
-                .password("test123")
+                .password("{noop}test123")
                 .roles("ADMIN")
                 .build();
 
         UserDetails billy = User.builder()
                 .username("Billy")
-                .password("test123")
-                .roles("EMPLOYEE,MANGER")
+                .password("{noop}test123")
+                .roles("EMPLOYEE","MANAGER")
                 .build();
 
         UserDetails tasos = User.builder()
                 .username("Tasos")
-                .password("test123")
-                .roles("EMPLOYEE,MANGER,ADMIN")
+                .password("{noop}test123")
+                .roles("EMPLOYEE","MANAGER","ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(giannis, billy, tasos);
     }
