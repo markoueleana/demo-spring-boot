@@ -17,12 +17,13 @@ CREATE TABLE `users` (
 --
 -- Inserting data for table `users`
 --
-
+-- Default passwords here are: fun123
 INSERT INTO `users` 
 VALUES 
-('john','{noop}test123',1),
-('mary','{noop}test123',1),
-('susan','{noop}test123',1);
+('giannis','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q',1),
+('tasos','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q',1),
+('billy','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q',1);
+
 
 
 --
@@ -42,11 +43,11 @@ CREATE TABLE `authorities` (
 
 INSERT INTO `authorities` 
 VALUES 
-('john','ROLE_EMPLOYEE'),
-('mary','ROLE_EMPLOYEE'),
-('mary','ROLE_MANAGER'),
-('susan','ROLE_EMPLOYEE'),
-('susan','ROLE_MANAGER'),
-('susan','ROLE_ADMIN');
+('giannis','ROLE_EMPLOYEE'),
+('tasos','ROLE_EMPLOYEE'),
+('tasos','ROLE_MANAGER'),
+('billy','ROLE_EMPLOYEE'),
+('billy','ROLE_MANAGER'),
+('billy','ROLE_ADMIN');
 
 
