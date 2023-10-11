@@ -24,8 +24,7 @@ public class HelloWorldController {
     }
 
     @RequestMapping("/processForm-V2")
-    public String processFormV2(HttpServletRequest request, Model model){
-        String name = request.getParameter("studentName");
+    public String processFormV2(@RequestParam("studentName") String name , Model model){
           model.addAttribute("message","The is the name "+ name);
           return "helloworld";
     }
