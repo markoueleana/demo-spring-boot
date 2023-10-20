@@ -21,16 +21,9 @@
     </div>
     <div class="form-group">
         <label for="country"> Country:</label>
-        <select type="text" id="country"  class="form-control"  th:field="*{country}">
-            <option th:value="Brazil">
-                Brazil
-            </option>
-            <option th:value="Greece">
-                Greece
-            </option>
-            <option th:value="Denmark">
-                Denmark
-        </option>
+        <select type="text" id="country"  class="form-control"   th:field="*{country}">
+            <option th:each="student: ${countries}" th:value="${student}" th:text="${student}" />
+
         </select>
     </div>
     <br>
