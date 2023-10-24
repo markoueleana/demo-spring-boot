@@ -23,9 +23,16 @@
         <label for="country"> Country:</label>
         <select type="text" id="country"  class="form-control"   th:field="*{country}">
             <option th:each="student: ${countries}" th:value="${student}" th:text="${student}" />
-
         </select>
     </div>
+
+        <label > Language:</label>
+            <input type="radio"   th:each="language: ${languages}"
+                   th:field="*{favoritelanguage}"
+                   th:value="${language}" th:text="${language}" />
+
+
+
     <br>
     <button class="btn btn-default" type="submit">Submit</button>
 </form>

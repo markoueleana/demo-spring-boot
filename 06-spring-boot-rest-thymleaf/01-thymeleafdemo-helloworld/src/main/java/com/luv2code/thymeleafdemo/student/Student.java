@@ -6,6 +6,16 @@ public class Student {
     String lastName;
     String country;
 
+    String favoritelanguage;
+    public String getFavoritelanguage() {
+        return favoritelanguage;
+    }
+
+    public void setFavoritelanguage(String favoritelanguage) {
+        this.favoritelanguage = favoritelanguage;
+    }
+
+
     public String getCountry() {
         return country;
     }
