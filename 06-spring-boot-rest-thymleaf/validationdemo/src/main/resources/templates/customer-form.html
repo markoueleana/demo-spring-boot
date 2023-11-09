@@ -19,6 +19,11 @@
         th:errors="*{lastName}"
         class="error"></span>
     <br><br>
+    Age: <input type="text" th:field="*{age}">
+    <span th:if="${#fields.hasErrors('age')}"
+          th:errors="*{age}"
+          class="error"></span>
+    <br><br>
     <input type="submit" value="Submit">
 </form>
 </body>
