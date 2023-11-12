@@ -28,6 +28,7 @@ public class CustomerController {
     public String processForm(
             @Valid @ModelAttribute("customer") Customer theCustomer,
             BindingResult theBingdingResult) {
+        System.out.println("AKSJSJAJSJSASSS" + theBingdingResult.toString());
         if (theBingdingResult.hasErrors()) {
             return "customer-form";
         } else return "customer-confirmation";
