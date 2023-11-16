@@ -1,8 +1,7 @@
-package com.springboot.cruddemo.service;
+package com.springboot.cruddemo.thymleafdemo.service;
 
-import com.springboot.cruddemo.dao.EmployeeDAO;
-import com.springboot.cruddemo.dao.EmployeeDAOJpaImpl;
-import com.springboot.cruddemo.entity.Employee;
+import com.springboot.cruddemo.thymleafdemo.dao.EmployeeDAO;
+import com.springboot.cruddemo.thymleafdemo.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

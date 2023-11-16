@@ -1,6 +1,6 @@
-package com.springboot.cruddemo.dao;
+package com.springboot.cruddemo.thymleafdemo.dao;
 
-import com.springboot.cruddemo.entity.Employee;
+import com.springboot.cruddemo.thymleafdemo.entity.Employee;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
