@@ -3,36 +3,22 @@ package com.springboot.demosecurity.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class DemoSecurityConfig {
-    @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
+        @Bean
+        public UserDetailsManager userDetailsManager(DataSource dataSource){
+            JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+            jdbcUserDetailsManager.setUsersByUsernameQuery("select user_id, pw, active from members where user id=?");
+            jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select user_id, role from roles where user id=?");
+            return new JdbcUserDetailsManager(dataSource);
+        }
 
-        UserDetails peli = User.builder()
-                .username("peli")
-                .password("{noop}test123")
-                .roles("EMPLOYEE")
-                .build();
-
-        UserDetails lenia = User.builder()
-                .username("lenia")
-                .password("{noop}test123")
-                .roles("EMPLOYEE", "MANAGER")
-                .build();
-
-        UserDetails susan = User.builder()
-                .username("susan")
-                .password("{noop}test123")
-                .roles("EMPLOYEE", "MANAGER", "ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(peli, lenia, susan);
-    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer->
@@ -54,4 +40,5 @@ public class DemoSecurityConfig {
                         configurer.accessDeniedPage("/access-denied"));
         return http.build();
     }
+
 }

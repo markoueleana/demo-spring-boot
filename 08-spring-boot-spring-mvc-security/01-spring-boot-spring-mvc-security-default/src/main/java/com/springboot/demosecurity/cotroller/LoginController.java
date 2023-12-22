@@ -1,5 +1,6 @@
 package com.springboot.demosecurity.cotroller;
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
