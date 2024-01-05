@@ -17,18 +17,25 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 
-		return  runner->{createInstructor(appDAO);
+		return  runner->{findInstructor(appDAO);
 		};
 	}
 
 	private void createInstructor(AppDAO appDAO) {
-		Instructor tempInstructor= new Instructor("Kapari","Papatoula","kappat@hotmail.com");
+		Instructor tempInstructor= new Instructor("Mousta","Kis","moustakis@hotmail.com");
 		InstructorDetail tempInstructorDetail =
-				new InstructorDetail("http://www.kapari.pat/youtube","food blogger");
+				new InstructorDetail("http://www.kapari.pat/youtube","Shaving");
 		tempInstructor.setInstructorDetail(tempInstructorDetail);
 		System.out.println("Saving instructor "+ tempInstructor);
 		appDAO.save(tempInstructor);
 
 	}
+	private void findInstructor(AppDAO appDAO) {
+		int id= 1;
+		Instructor tempInstructor=  appDAO.findInstructorById(id);
 
+		System.out.println("Instructor found  "+ tempInstructor);
+
+		System.out.println("Instructor Details found  "+ tempInstructor.getInstructorDetail());
+	}
 }
