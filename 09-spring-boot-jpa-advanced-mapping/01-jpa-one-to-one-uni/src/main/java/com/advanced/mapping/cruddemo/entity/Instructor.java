@@ -16,8 +16,6 @@ public class Instructor {
     private String lastName;
     @Column(name="email")
     private String email;
-    @Column(name="instructor_detail_id")
-    private int instructorDetailId;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="instructor_detail_id")
     private InstructorDetail instructorDetail;
@@ -26,13 +24,11 @@ public class Instructor {
 
     }
 
-    public Instructor(String firstName, String lastName, String email, int instructorDetailId) {
+    public Instructor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.instructorDetailId = instructorDetailId;
     }
-
     public int getId() {
         return id;
     }
@@ -65,13 +61,6 @@ public class Instructor {
         this.email = email;
     }
 
-    public int getInstructorDetailId() {
-        return instructorDetailId;
-    }
-
-    public void setInstructorDetailId(int instructorDetailId) {
-        this.instructorDetailId = instructorDetailId;
-    }
 
     public InstructorDetail getInstructorDetail() {
         return instructorDetail;
@@ -81,6 +70,7 @@ public class Instructor {
         this.instructorDetail = instructorDetail;
     }
 
+
     @Override
     public String toString() {
         return "Instructor{" +
@@ -88,7 +78,6 @@ public class Instructor {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", instructorDetailId=" + instructorDetailId +
                 ", instructorDetail=" + instructorDetail +
                 '}';
     }
