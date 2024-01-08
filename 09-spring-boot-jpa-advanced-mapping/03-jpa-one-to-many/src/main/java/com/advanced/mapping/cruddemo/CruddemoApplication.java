@@ -1,6 +1,7 @@
 package com.advanced.mapping.cruddemo;
 
 import com.advanced.mapping.cruddemo.dao.AppDAO;
+import com.advanced.mapping.cruddemo.entity.Course;
 import com.advanced.mapping.cruddemo.entity.Instructor;
 import com.advanced.mapping.cruddemo.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -17,8 +18,25 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 
-		return  runner->{findInstructorDetail(appDAO);
+		return  runner->{createInstructorWithCourses(appDAO);
 		};
+	}
+
+	private void createInstructorWithCourses(AppDAO appDAO) {
+		Instructor tempInstructor= new Instructor("Kara","Melakis","karamelakis@hotmail.com");
+		InstructorDetail tempInstructorDetail =
+				new InstructorDetail("http://www.kapamelakis.pat/youtube","Caramel");
+		Course tempCourse1 =
+				new Course("Vanilla Caramel Class");
+		Course tempCourse2 =
+				new Course("Vanilla Caramel Master Class");
+		tempInstructor.setInstructorDetail(tempInstructorDetail);
+		tempInstructor.addCourse(tempCourse1);
+		tempInstructor.addCourse(tempCourse2);
+		System.out.println("Saving instructor "+ tempInstructor);
+		System.out.println("Courses "+ tempInstructor.getCourses());
+		appDAO.save(tempInstructor);
+
 	}
 
 	private void createInstructor(AppDAO appDAO) {
