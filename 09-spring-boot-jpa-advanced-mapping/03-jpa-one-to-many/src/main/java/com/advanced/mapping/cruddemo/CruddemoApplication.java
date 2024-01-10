@@ -21,7 +21,7 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 
 		return  runner->{
-			findInstructorWithCoursesJoinFetch( appDAO);
+			updateCourse( appDAO);
 		};
 	}
 
@@ -94,5 +94,21 @@ public class CruddemoApplication {
 		System.out.println("Instructor  Detail found  "+ tempInstructorDetail);
 
 		System.out.println("Instructor  found  "+ tempInstructorDetail.getInstructor());
+	}
+	private void updateInstructor(AppDAO appDAO) {
+		int id=1;
+		System.out.println("Finding id "+ id);
+
+		Instructor tempInstructor=  appDAO.findInstructorById(id);
+		tempInstructor.setLastName(tempInstructor.getLastName()+"newLast");
+		appDAO.updateInstructor(tempInstructor);
+	}
+	private void updateCourse(AppDAO appDAO) {
+		int id=10;
+		System.out.println("Finding id "+ id);
+
+		Course tempCourse=  appDAO.findCourseById(id);
+		tempCourse.setTitle(tempCourse.getTitle()+" new Title");
+		appDAO.updateCourse(tempCourse);
 	}
 }
