@@ -4,6 +4,7 @@ import com.advanced.mapping.cruddemo.dao.AppDAO;
 import com.advanced.mapping.cruddemo.entity.Course;
 import com.advanced.mapping.cruddemo.entity.Instructor;
 import com.advanced.mapping.cruddemo.entity.InstructorDetail;
+import com.advanced.mapping.cruddemo.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,8 +22,37 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 
 		return  runner->{
-			updateCourse( appDAO);
+			deleteCourseAndReviews( appDAO);
 		};
+	}
+
+	private void deleteCourseAndReviews(AppDAO appDAO) {
+		int courseId= 10;
+		appDAO.deleteCourseById(courseId);
+		System.out.println("Course and its review were deleted!");
+	}
+
+	private void retrieveCourseAndReviews(AppDAO appDAO) {
+		int courseId= 10;
+		Course tempCourse=appDAO.findCourseAndReviewsByCourseId(courseId);
+
+		System.out.println("Course's reviews "+ tempCourse.getReviews());
+	}
+
+	private void createCourseAndReviews(AppDAO appDAO) {
+		Course tempCourse = new Course("Painting Classes");
+
+		Review tempReview1 = new Review("Awesome");
+		Review tempReview2 = new Review("The classes were great");
+		Review tempReview3= new Review("Loved it!");
+
+		tempCourse.addReview(tempReview1);
+		tempCourse.addReview(tempReview2);
+		tempCourse.addReview(tempReview3);
+
+		appDAO.save(tempCourse);
+
+		System.out.println("Course's reviews "+ tempCourse.getReviews());
 	}
 
 	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
@@ -86,7 +116,10 @@ public class CruddemoApplication {
 
 		System.out.println("Instructor Details found  "+ tempInstructor.getInstructorDetail());
 	}
-
+	private void deleteInstructor(AppDAO appDAO) {
+		int id= 1;
+		appDAO.deleteInstructorById(id);
+	}
 	private void findInstructorDetail(AppDAO appDAO) {
 		int id= 1;
 		InstructorDetail tempInstructorDetail=  appDAO.findInstructorDetailById(id);
