@@ -1,10 +1,7 @@
 package com.advanced.mapping.cruddemo;
 
 import com.advanced.mapping.cruddemo.dao.AppDAO;
-import com.advanced.mapping.cruddemo.entity.Course;
-import com.advanced.mapping.cruddemo.entity.Instructor;
-import com.advanced.mapping.cruddemo.entity.InstructorDetail;
-import com.advanced.mapping.cruddemo.entity.Review;
+import com.advanced.mapping.cruddemo.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +19,43 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 
 		return  runner->{
+			addMoreCousesForStudent( appDAO);
 		};
+	}
+
+	private void addMoreCousesForStudent(AppDAO appDAO) {
+		int studentId= 2;
+		Student tempStudent=appDAO.findStudentAndCoursesByStudentId(studentId);
+
+
+		Course tempCourse1= new Course("Makeup art");
+		Course tempCourse2= new Course("How to muscle up!");
+		tempStudent.addCourse(tempCourse1);
+		tempStudent.addCourse(tempCourse2);
+		appDAO.updateStudent(tempStudent);
+	}
+
+	private void findStudentAndCourses(AppDAO appDAO) {
+		int studentId= 2;
+		Student tempStudent=appDAO.findStudentAndCoursesByStudentId(studentId);
+		System.out.println("Students: "+ tempStudent);
+		System.out.println("Courses: "+ tempStudent.getCourses());
+	}
+
+	private void findCourseAndStudents(AppDAO appDAO) {
+		int courseId= 10;
+		Course tempCourse=appDAO.findCourseAndStudentsByCourseId(courseId);
+		System.out.println("Course: "+ tempCourse);
+		System.out.println("Students: "+ tempCourse.getStudents());
+	}
+
+	private void createCourseAndStudents(AppDAO appDAO) {
+		Course tempCourse= new Course("Mathematics");
+		Student tempStudent1= new Student("Kodi","Adis", "kodi@mail.com");
+		Student tempStudent2= new Student("Filos","Sofos", "filoso@mail.com");
+		tempCourse.addStudent(tempStudent1);
+		tempCourse.addStudent(tempStudent2);
+		appDAO.save(tempCourse);
 	}
 
 	private void deleteCourseAndReviews(AppDAO appDAO) {

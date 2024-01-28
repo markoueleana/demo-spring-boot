@@ -3,6 +3,7 @@ package com.advanced.mapping.cruddemo.dao;
 import com.advanced.mapping.cruddemo.entity.Course;
 import com.advanced.mapping.cruddemo.entity.Instructor;
 import com.advanced.mapping.cruddemo.entity.InstructorDetail;
+import com.advanced.mapping.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,12 @@ public class AppDAOImpl implements AppDAO{
     @Override
     public Course findCourseById(int id) {
         return entityManager.find(Course.class, id);
+    }
+
+    @Override
+    public void deleteStudentById(int id) {
+        Student student = entityManager.find(Student.class, id);
+        entityManager.remove(student);
     }
 
     @Override
@@ -95,6 +102,13 @@ public class AppDAOImpl implements AppDAO{
     }
 
     @Override
+    @Transactional
+    public void updateStudent(Student theStudent) {
+        entityManager.merge(theStudent);
+
+    }
+
+    @Override
     public Course findCourseAndReviewsByCourseId(int id) {
         TypedQuery<Course> query= entityManager.createQuery(
                 "select c from Course c "
@@ -105,6 +119,28 @@ public class AppDAOImpl implements AppDAO{
         query.setParameter("data",id);
         Course course = query.getSingleResult();
         return course;
+    }
+
+    @Override
+    public Course findCourseAndStudentsByCourseId(int id) {
+        TypedQuery<Course> query= entityManager.createQuery(
+                "select c from Course c "
+                        + "JOIN FETCH c.students "
+                        + "where c.id=:data",Course.class);
+        query.setParameter("data",id);
+        Course course = query.getSingleResult();
+        return course;
+    }
+
+    @Override
+    public Student findStudentAndCoursesByStudentId(int id) {
+        TypedQuery<Student> query= entityManager.createQuery(
+                "select c from Student c "
+                        + "JOIN FETCH c.courses "
+                        + "where c.id=:data",Student.class);
+        query.setParameter("data",id);
+        Student student = query.getSingleResult();
+        return student;
     }
 
     @Override
