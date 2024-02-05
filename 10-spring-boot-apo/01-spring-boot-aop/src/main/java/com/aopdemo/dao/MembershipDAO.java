@@ -2,5 +2,5 @@ package com.aopdemo.dao;
 
 
 public interface MembershipDAO {
-    void addMember();
+    String addMember();
 }

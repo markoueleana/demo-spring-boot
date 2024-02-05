@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 public class MembershipDAOImp implements MembershipDAO{
 
     @Override
-    public void addMember() {
-            System.out.println(getClass()+": MOCKING OF ADDING A MEMBERSHIP ACCOUNT");
+    public String addMember() {
+        return getClass()+": MOCKING OF ADDING A MEMBERSHIP ACCOUNT";
     }
 }
