@@ -10,4 +10,10 @@ public class AccountDAOImp implements AccountDAO{
     public void addAccount(Account theAccount,boolean vipFlag) {
             System.out.println(getClass()+": MOCKING OF ADDING AN ACCOUNT");
     }
+
+    @Override
+    public boolean doWork() {
+        System.out.println(getClass()+":  doWork()");
+        return false;
+    }
 }

@@ -9,4 +9,9 @@ public class MembershipDAOImp implements MembershipDAO{
     public String addMember() {
         return getClass()+": MOCKING OF ADDING A MEMBERSHIP ACCOUNT";
     }
+
+    @Override
+    public int countOfMemberships() {
+        return 4;
+    }
 }

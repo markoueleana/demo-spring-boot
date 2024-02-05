@@ -23,6 +23,9 @@ public class AopdemoApplication {
 	private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		Account newAccount= new Account("the main account","upper");
 		accountDAO.addAccount(newAccount,false);
+		accountDAO.doWork();
 		System.out.println(membershipDAO.addMember());
+
+		System.out.println(membershipDAO.countOfMemberships());
 	}
 }
