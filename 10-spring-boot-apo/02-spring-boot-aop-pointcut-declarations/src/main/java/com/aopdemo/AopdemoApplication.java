@@ -23,7 +23,7 @@ public class AopdemoApplication {
 	private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		Account newAccount= new Account("the main account","upper");
 		accountDAO.setName("Former Name the main account ");
-
+		accountDAO.addAccount(newAccount,true);
 		System.out.println(accountDAO.getName());
 
 		accountDAO.doWork();
