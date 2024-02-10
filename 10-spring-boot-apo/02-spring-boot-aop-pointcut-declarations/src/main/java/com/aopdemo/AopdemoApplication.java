@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.security.KeyStore;
 import java.util.List;
 
 @SpringBootApplication
@@ -18,8 +19,21 @@ public class AopdemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		return runner->{
-			demoTheAfterReturnAdvice(accountDAO);
+			demoTheAfterThrowingAdvice(accountDAO);
 		};
+	}
+
+	private void demoTheAfterThrowingAdvice(AccountDAO accountDAO) {
+		List<Account> accounts = null;
+		try {
+			accounts=accountDAO.findAccounts(true);
+		} catch (Exception ex) {
+			System.out.println("\n\n Main Program: caught exception "+ ex);
+		}
+
+		System.out.println("\n\n Main Program: demoTheAfterThrowingAdvice");
+		System.out.println(accounts);
+		System.out.println("\n\n ");
 	}
 
 	private void demoTheAfterReturnAdvice(AccountDAO accountDAO) {

@@ -3,11 +3,10 @@ package com.aopdemo.aspect;
 import com.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +23,12 @@ public class DemoLoggingAspect {
         convertNamesToUpperCase(results);
 
         System.out.println("==>> My first @AfterReturning advice. THE MODIFIED RESULTS ARE : "+results);
+    }
+    @AfterThrowing(pointcut = "execution (* com.aopdemo.dao.AccountDAO.findAccounts(..))",throwing = "theException")
+    public void afterReturningAdvice(JoinPoint theJoinPoint, Throwable theException) {
+        String methodName= theJoinPoint.getSignature().toShortString();
+        System.out.println("==>> My first @AfterThrowing advice. THE METHOD :"+methodName+" THREW AN EXCEPTION ARE : "+theException);
+
     }
 
     private void convertNamesToUpperCase(List<Account> results) {

@@ -11,9 +11,15 @@ import java.util.List;
 public class AccountDAOImp implements AccountDAO{
     private String name;
     private String lastName;
-
     @Override
-    public List<Account> findAccounts() {
+    public List<Account> findAccounts(){
+        return findAccounts(false);
+    }
+
+    public List<Account> findAccounts(boolean tripWire) {
+        if (tripWire){
+            throw new RuntimeException("NO ACCOUNTS FOR YOU");
+        }
         List<Account> myAccounts= new ArrayList<>();
         Account account1= new Account("Vanika","Upper");
         Account account2= new Account("Skilika","Medium");
