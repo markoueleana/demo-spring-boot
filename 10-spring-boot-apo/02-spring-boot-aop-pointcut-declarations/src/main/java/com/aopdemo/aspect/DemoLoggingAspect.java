@@ -2,6 +2,7 @@ package com.aopdemo.aspect;
 
 import com.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -10,10 +11,18 @@ import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Aspect
 @Component
 @Order(1)
 public class DemoLoggingAspect {
+
+    @AfterReturning(pointcut = "execution (* com.aopdemo.dao.AccountDAO.findAccounts(..))",returning = "results")
+    public void afterReturningAdvice(JoinPoint theJoinPoint, List<Account> results) {
+        System.out.println("==>> My first @AfterReturning advice. THE RESULTS ARE : "+results);
+
+    }
     @Before("com.aopdemo.aspect.AopExpressions.forDaoPackage()")
     public void beforeAddAccount(JoinPoint theJoinPoint) {
         MethodSignature signature = (MethodSignature) theJoinPoint.getSignature();
