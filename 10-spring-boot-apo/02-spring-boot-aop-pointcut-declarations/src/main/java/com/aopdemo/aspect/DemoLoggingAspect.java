@@ -21,8 +21,18 @@ public class DemoLoggingAspect {
     @AfterReturning(pointcut = "execution (* com.aopdemo.dao.AccountDAO.findAccounts(..))",returning = "results")
     public void afterReturningAdvice(JoinPoint theJoinPoint, List<Account> results) {
         System.out.println("==>> My first @AfterReturning advice. THE RESULTS ARE : "+results);
+        convertNamesToUpperCase(results);
 
+        System.out.println("==>> My first @AfterReturning advice. THE MODIFIED RESULTS ARE : "+results);
     }
+
+    private void convertNamesToUpperCase(List<Account> results) {
+        for(Account acc : results){
+
+            acc.setName( acc.getName().toUpperCase());
+        }
+    }
+
     @Before("com.aopdemo.aspect.AopExpressions.forDaoPackage()")
     public void beforeAddAccount(JoinPoint theJoinPoint) {
         MethodSignature signature = (MethodSignature) theJoinPoint.getSignature();
