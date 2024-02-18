@@ -16,4 +16,12 @@ public class TrafficFortuneServiceImp implements TrafficFortuneService{
 
         return "Except heavy traffic!";
     }
+
+    @Override
+    public String getFortune(boolean tripWire) {
+       if (tripWire){
+           throw  new RuntimeException("Major accident! Highway closed");
+       }
+        return getFortune();
+    }
 }

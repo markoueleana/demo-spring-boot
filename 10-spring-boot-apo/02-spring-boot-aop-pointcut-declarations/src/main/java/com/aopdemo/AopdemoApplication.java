@@ -22,8 +22,16 @@ public class AopdemoApplication {
 											   MembershipDAO membershipDAO,
 											   TrafficFortuneService trafficFortuneService) {
 		return runner->{
-			demoAroundAdvice(trafficFortuneService);
+			demoAroundAdviceHandleExecption(trafficFortuneService);
 		};
+	}
+
+	private void demoAroundAdviceHandleExecption(TrafficFortuneService trafficFortuneService) {
+		System.out.println("\n\n Main Program: demoAroundAdviceHandleException");
+
+		System.out.println("\n\n Call trafficFortuneService ");
+		String result = trafficFortuneService.getFortune(true);
+		System.out.println(result);
 	}
 
 	private void demoAroundAdvice(TrafficFortuneService trafficFortuneService) {

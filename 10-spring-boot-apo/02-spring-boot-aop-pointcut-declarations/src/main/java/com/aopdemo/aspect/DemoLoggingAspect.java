@@ -21,12 +21,18 @@ public class DemoLoggingAspect {
     }
     @Around( "execution (* com.aopdemo.service.*.getFortune(..))")
     public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
-        String methodName= proceedingJoinPoint.getSignature().toShortString();
-        System.out.println("==>> My first @Around advice. THE METHOD : "+methodName);
+        String methodName = proceedingJoinPoint.getSignature().toShortString();
+        System.out.println("==>> My first @Around advice. THE METHOD : " + methodName);
         long beginTimeStamp = System.currentTimeMillis();
-        Object result= proceedingJoinPoint.proceed();
+        Object result = null;
+        try {
+            result = proceedingJoinPoint.proceed();
+        } catch (Exception ex) {
+            System.out.println("==>> My first @Around advice caught an exception " + ex.getMessage());
+            result = "Major accident";
+        }
         long endTimeStamp = System.currentTimeMillis();
-        long diff= endTimeStamp-beginTimeStamp;
+        long diff = endTimeStamp - beginTimeStamp;
 
 
         System.out.println("==>> It took : "+diff+" to calculate the traffic status  ");
