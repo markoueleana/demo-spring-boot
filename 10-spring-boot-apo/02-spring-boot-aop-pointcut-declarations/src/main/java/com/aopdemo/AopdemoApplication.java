@@ -22,18 +22,32 @@ public class AopdemoApplication {
 											   MembershipDAO membershipDAO,
 											   TrafficFortuneService trafficFortuneService) {
 		return runner->{
-			demoAroundAdviceHandleExecption(trafficFortuneService);
+			demoAroundAdviceRethrowException(trafficFortuneService);
 		};
 	}
 
-	private void demoAroundAdviceHandleExecption(TrafficFortuneService trafficFortuneService) {
+	private void demoAroundAdviceHandleException(TrafficFortuneService trafficFortuneService) {
 		System.out.println("\n\n Main Program: demoAroundAdviceHandleException");
 
 		System.out.println("\n\n Call trafficFortuneService ");
-		String result = trafficFortuneService.getFortune(true);
-		System.out.println(result);
-	}
 
+
+		String result = trafficFortuneService.getFortune(true);
+
+		System.out.println(result);
+
+	}
+	private void demoAroundAdviceRethrowException(TrafficFortuneService trafficFortuneService) {
+		System.out.println("\n\n Main Program: demoAroundAdviceHandleException");
+
+		System.out.println("\n\n Call trafficFortuneService ");
+		try{
+			String result = trafficFortuneService.getFortune(true);
+			System.out.println(result);
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
 	private void demoAroundAdvice(TrafficFortuneService trafficFortuneService) {
 		System.out.println("\n\n Main Program: demoAroundAdvice");
 

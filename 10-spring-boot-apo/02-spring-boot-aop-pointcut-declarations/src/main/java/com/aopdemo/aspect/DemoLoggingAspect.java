@@ -29,7 +29,7 @@ public class DemoLoggingAspect {
             result = proceedingJoinPoint.proceed();
         } catch (Exception ex) {
             System.out.println("==>> My first @Around advice caught an exception " + ex.getMessage());
-            result = "Major accident";
+            throw ex;
         }
         long endTimeStamp = System.currentTimeMillis();
         long diff = endTimeStamp - beginTimeStamp;
