@@ -2,6 +2,7 @@ package com.aopdemo.aspect;
 
 import com.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
@@ -17,6 +18,19 @@ public class DemoLoggingAspect {
     public void afterAdvice(JoinPoint theJoinPoint) {
         System.out.println("==>> My first @After advice.");
 
+    }
+    @Around( "execution (* com.aopdemo.service.*.getFortune(..))")
+    public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
+        String methodName= proceedingJoinPoint.getSignature().toShortString();
+        System.out.println("==>> My first @Around advice. THE METHOD : "+methodName);
+        long beginTimeStamp = System.currentTimeMillis();
+        Object result= proceedingJoinPoint.proceed();
+        long endTimeStamp = System.currentTimeMillis();
+        long diff= endTimeStamp-beginTimeStamp;
+
+
+        System.out.println("==>> It took : "+diff+" to calculate the traffic status  ");
+        return result;
     }
     @AfterReturning(pointcut = "execution (* com.aopdemo.dao.AccountDAO.findAccounts(..))",returning = "results")
     public void afterReturningAdvice(JoinPoint theJoinPoint, List<Account> results) {
