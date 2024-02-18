@@ -15,7 +15,7 @@ import java.util.List;
 public class DemoLoggingAspect {
     @After( "execution (* com.aopdemo.dao.AccountDAO.findAccounts(..))")
     public void afterAdvice(JoinPoint theJoinPoint) {
-        System.out.println("==>> My first @Afteradvice. THE RESULTS ARE : ");
+        System.out.println("==>> My first @After advice.");
 
     }
     @AfterReturning(pointcut = "execution (* com.aopdemo.dao.AccountDAO.findAccounts(..))",returning = "results")
