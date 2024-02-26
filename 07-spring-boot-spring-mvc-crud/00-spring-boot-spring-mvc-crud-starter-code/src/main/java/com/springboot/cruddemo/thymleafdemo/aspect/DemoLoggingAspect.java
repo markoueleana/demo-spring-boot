@@ -1,6 +1,7 @@
 package com.springboot.cruddemo.thymleafdemo.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -21,9 +22,22 @@ public class DemoLoggingAspect {
     public void forDaoPackage(){}
     @Pointcut("forDaoPackage() || forServicePackage()|| forControllerPackage()")
     public void forAppFlow(){}
-    @Before("forAppFlow(){")
+    @Before("forAppFlow()")
     public void before(JoinPoint joinPoint){
         String methodName=joinPoint.getSignature().toShortString();
         logger.info("==> in @Before, calling method : "+methodName);
+        Object[] args= joinPoint.getArgs();
+        for(Object a:args){
+            logger.info("==> Argument: "+a);
+
+        }
+
+    }
+    @AfterReturning(pointcut = "forAppFlow()",returning = "result")
+    public void afterReturning(JoinPoint joinPoint,Object result){
+        String methodName=joinPoint.getSignature().toShortString();
+        logger.info("==> in @AfterReturning, calling method : "+methodName);
+
+        logger.info("==> the result is : "+ result);
     }
 }
